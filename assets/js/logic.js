@@ -1,7 +1,7 @@
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-const jobsDescription = ['Ai Engineer' , 'Tech Instructor' , 'Web Developer'];
+const jobsDescription = ['Arduino & Programming Instructor', 'Robotics Instructor', 'Game Coding Instructor', 'Web Developer'];
 
 function typeEffect() {
     const currentWord = jobsDescription[wordIndex];
@@ -10,30 +10,21 @@ function typeEffect() {
     } else {
         typingAnimation.textContent = currentWord.substring(0, charIndex++);
     }
-
     if (!isDeleting && charIndex === currentWord.length) {
-        // pause before deleting
         isDeleting = true;
-        setTimeout(typeEffect, 1000);
+        setTimeout(typeEffect, 1200);
         return;
     } else if (isDeleting && charIndex === 0) {
-        // move to next word
         isDeleting = false;
         wordIndex = (wordIndex + 1) % jobsDescription.length;
     }
-
-    const speed = isDeleting ? 100 : 150; // typing vs deleting speed
+    const speed = isDeleting ? 60 : 110;
     setTimeout(typeEffect, speed);
 }
 
 typeEffect();
 
-// Add scroll-in animation for elements
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
